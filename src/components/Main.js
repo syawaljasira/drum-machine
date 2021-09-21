@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 
 import Display from './Display';
 
 function Main(props) {
-  const [show, setShow] = useState('Heater-1');
+  const [show] = useState('Heater-1');
 
   const handleSoundPlay = (key, name) => {
-    setShow(name);
+    const display = document.getElementById('display');
+    display.innerText = name;
     const audio = document.getElementById(key);
     audio.currentTime = 0;
     audio.play();

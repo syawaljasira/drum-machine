@@ -24,11 +24,12 @@ export const DrumPad = (props) => {
           onClick={() => handleSoundPlay(sound.key, sound.name)}
           variant="success"
           size="lg"
-          className="p-5 shadow drum-pad"
+          className="drum-pad p-5 shadow "
           type="button"
+          id={idx}
         >
           <h2>{sound.key}</h2>
-          <audio className="clip" src={sound.mp3} id={sound.key}></audio>
+          <audio className="clip" src={sound.mp3} id={sound.key} />
         </Button>
       </Col>
     );
@@ -40,6 +41,7 @@ export const DrumPad = (props) => {
         <Box
           key={index}
           sound={sound}
+          idx={index}
           handleSoundPlay={props.handleSoundPlay}
         />
       ))}
