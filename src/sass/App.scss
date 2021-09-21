@@ -1,3 +1,18 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
 /* Main Color */
+$black: #150050;
+$lightBlue: #316b83;
+$lightGreen: #b1e693;
+
+.bg-back {
+  background-color: $black;
+}
+
+.bg-lightGreen {
+  background-color: $lightGreen;
+}
+
+.bg-lightBlue {
+  background-color: $lightBlue;
+}

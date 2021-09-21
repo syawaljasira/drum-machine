@@ -1,76 +1,49 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Button, Col } from 'react-bootstrap';
+import Show from './Show';
 
-export const DrumPad = ({ sounds }) => {
-  return sounds.map((sound, index) => {
-    return (
-      <Fragment>
-        <Box audio={sound.mp3} text={sound.key} idx={index} />
-      </Fragment>
-    );
-  });
-};
-
-function Box(props) {
-  const [play, setPlay] = useState(false);
-  const [show, setShow] = useState('');
-  const audio = useRef();
-
-  const handleSound = () => {
-    setPlay(!play);
-    audio.current.play();
-
-    setShow(props.text);
-  };
-
-  useEffect(() => {
-    const audio = document.getElementById(props.text);
-    audio.addEventListener('keydown', () => setPlay(false));
-    return () => {
-      audio.removeEventListener('keydown', () => setPlay(false));
+export const DrumPad = (props) => {
+  function Box({ sound, idx, handleSoundPlay }) {
+    const handleKeydown = (ev) => {
+      if (ev.key.toUpperCase() === sound.key) {
+        props.handleSoundPlay(sound.key, sound.name);
+      }
     };
-  }, []);
 
-  return (
-    <Col xs={3} className="mx-1 my-2 d-grid">
-      <Button
-        variant="success"
-        size="lg"
-        className="p-5"
-        onClick={handleSound}
-        type="button"
-      >
-        <h2>{props.text}</h2>
-        <audio
-          ref={audio}
-          className="clip"
-          id={props.text}
-          src={props.audio}
-        ></audio>
-      </Button>
-    </Col>
-  );
-}
+    useEffect(() => {
+      document.addEventListener('keydown', handleKeydown);
+      return () => {
+        document.removeEventListener('keydown', handleKeydown);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-document.addEventListener('keydown', (ev) => {
-  const id = ev.key.toUpperCase();
-  const audio = document.getElementById(id);
-
-  if (audio) {
-    const parent = audio.parentNode;
-    parent.classList.add('active');
-    audio.play();
-
-    setTimeout(() => {
-      parent.classList.remove('active');
-    }, 100);
+    return (
+      <Col xs={4} className="pt-2 d-grid">
+        <Button
+          onClick={() => handleSoundPlay(sound.key, sound.name)}
+          variant="success"
+          size="lg"
+          className="p-5 shadow drum-pad"
+          type="button"
+        >
+          <h2>{sound.key}</h2>
+          <audio className="clip" src={sound.mp3} id={sound.key}></audio>
+        </Button>
+      </Col>
+    );
   }
-});
 
-export const Show = ({ sound }) => {
   return (
-    <Col>
-      <div>{sound.key + 'is playing.'}</div>
-    </Col>
+    <Fragment>
+      {props.sounds.map((sound, index) => (
+        <Box
+          key={index}
+          sound={sound}
+          handleSoundPlay={props.handleSoundPlay}
+        />
+      ))}
+      <Show show={props.show} />
+    </Fragment>
   );
 };
