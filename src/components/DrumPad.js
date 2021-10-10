@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { Button, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 import Show from './Show';
 
 export const DrumPad = (props) => {
@@ -19,18 +19,17 @@ export const DrumPad = (props) => {
     }, []);
 
     return (
-      <Col xs={4} className="pt-2 d-grid">
-        <Button
+      <Col xs={4} className="p-2 d-grid">
+        <button
           onClick={() => handleSoundPlay(sound.key, sound.name)}
-          variant="success"
           size="lg"
-          className="drum-pad p-5 shadow "
+          className="bg-box rounded-3 drum-pad shadow py-3 py-xl-4"
           type="button"
           id={idx}
         >
           <h2>{sound.key}</h2>
           <audio className="clip" src={sound.mp3} id={sound.key} />
-        </Button>
+        </button>
       </Col>
     );
   }
@@ -45,7 +44,11 @@ export const DrumPad = (props) => {
           handleSoundPlay={props.handleSoundPlay}
         />
       ))}
-      <Show show={props.show} />
+      <Show
+        show={props.show}
+        change={props.change}
+        handleSwapSounds={props.handleSwapSounds}
+      />
     </Fragment>
   );
 };

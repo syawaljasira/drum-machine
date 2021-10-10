@@ -1,18 +1,34 @@
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
 /* Main Color */
-$black: #150050;
-$lightBlue: #316b83;
-$lightGreen: #b1e693;
+$back-color: #364547;
+$hover-back-color: #293436;
+$orange-color: #de992f;
+$hover-orange-color: #cf8a21;
+$bg-color: #252d2e;
+$text-color: #e8eaeb;
+$hover-text-color: #cbcfd1;
 
 .bg-back {
-  background-color: $black;
+  background-color: $back-color;
+  color: $text-color;
 }
 
-.bg-lightGreen {
-  background-color: $lightGreen;
+.bg-drum {
+  background-color: $bg-color;
 }
 
-.bg-lightBlue {
-  background-color: $lightBlue;
+.hover-back:hover {
+  background-color: $hover-text-color;
+  color: $back-color;
+}
+
+.bg-box {
+  background-color: $orange-color;
+  border: none;
+  color: $text-color;
+}
+
+.bg-box:hover {
+  background-color: $hover-orange-color;
 }

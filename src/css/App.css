@@ -11115,13 +11115,25 @@ textarea.form-control-lg {
 }
 /* Main Color */
 .bg-back {
-  background-color: #150050;
+  background-color: #364547;
+  color: #e8eaeb;
 }
 
-.bg-lightGreen {
-  background-color: #b1e693;
+.bg-drum {
+  background-color: #252d2e;
 }
 
-.bg-lightBlue {
-  background-color: #316b83;
+.hover-back:hover {
+  background-color: #cbcfd1;
+  color: #364547;
+}
+
+.bg-box {
+  background-color: #de992f;
+  border: none;
+  color: #e8eaeb;
+}
+
+.bg-box:hover {
+  background-color: #cf8a21;
 }
